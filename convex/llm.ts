@@ -30,7 +30,7 @@ export const callGemini = internalAction({
     const documents = await ctx.runQuery(api.documents.list, {});
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash", // Fast and efficient model
+      model: "gemini-2.5-flash", // Latest fast model with improved capabilities
     });
 
     const prompt = `${agent.systemPrompt}
