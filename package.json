@@ -1,6 +1,7 @@
 {
   "name": "exodia",
   "version": "1.0.0",
+  "type": "module",
   "description": "Agentic Workforce System - An experimental AI agent coordination platform",
   "main": "index.js",
   "directories": {
@@ -9,6 +10,11 @@
   "scripts": {
     "dev": "convex dev",
     "deploy": "convex deploy",
+    "build": "tsc --noEmit",
+    "lint": "eslint convex/**/*.ts",
+    "lint:fix": "eslint convex/**/*.ts --fix",
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run typecheck && npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +27,13 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "convex": "^1.28.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "typescript": "^5.9.3"
   }
 }

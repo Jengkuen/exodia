@@ -109,6 +109,32 @@ Query `documents:list` to see all documents created by agents.
 5. Actions are executed, potentially creating new tasks for other agents
 6. Process cascades through the agent workforce
 
+## Development & Validation
+
+### Code Quality Scripts
+
+```bash
+# Run ESLint to check code style
+npm run lint
+
+# Auto-fix linting issues
+npm run lint:fix
+
+# Run TypeScript type checking (requires convex dev running)
+npm run typecheck
+
+# Run all validation checks
+npm run validate
+```
+
+### Validation Status
+
+✅ **Phase 1 Code Validated**
+- Zero ESLint errors
+- TypeScript ready (requires generated types from `convex dev`)
+- All functions properly typed
+- See [VALIDATION.md](./VALIDATION.md) for detailed report
+
 ## Next Steps (Phase 2+)
 
 - [ ] Build React frontend UI
