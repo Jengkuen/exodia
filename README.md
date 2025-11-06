@@ -6,6 +6,10 @@ An experimental system designed to test emergent behavior in AI agent coordinati
 
 Exodia creates a "workforce" of AI agents that can autonomously coordinate work through explicit task delegation, shared knowledge creation, and self-organized collaboration patterns.
 
+**Current Configuration**: Business Strategy & Marketing Team
+- Specialized agents work together to transform business context into actionable marketing strategies
+- Automated workflow: Strategy → ICP Research → Marketing Plan
+
 ## Core Principles
 
 1. **Message-Passing Architecture**: Every task is a directed message to a specific agent
@@ -61,12 +65,11 @@ In the Convex dashboard or via the CLI, run the bootstrap mutation:
 npx convex run setup:bootstrap
 ```
 
-This creates 5 initial agents:
-- Chief of Staff (task router)
-- Research Analyst
-- Content Writer
-- Technical Writer
-- Project Manager
+This creates 4 specialized agents:
+- **Chief of Staff (COS)**: Task routing and coordination
+- **Chief Strategy Officer (CSO)**: Business strategy and planning
+- **ICP Analyst**: Ideal customer profile research and analysis
+- **Chief Marketing Officer (CMO)**: Marketing strategy and campaign planning
 
 ### 5. Start the Frontend
 
@@ -110,37 +113,103 @@ src/                       # Frontend (React)
 1. **View Agents**: Click "Agents" to see all active agents in your workforce
 2. **Create Tasks**: Click "Create Task" to assign work to an agent
 3. **Monitor Progress**: Click "Task Monitor" to see all tasks and their statuses
-4. **View Documents**: Click "Documents" to browse knowledge created by agents
+4. **View Documents**: Click "Documents" to browse strategies and plans created by agents
 
-### Creating Your First Task
+### Agent Workflow
+
+The agents work together in a coordinated workflow:
+
+1. **User → CSO**: Provide business context to Chief Strategy Officer
+2. **CSO → ICP Analyst**: CSO creates strategy and assigns ICP research
+3. **ICP Analyst → CMO**: Analyst delivers customer profiles for marketing planning
+4. **CMO**: Creates tailored marketing strategy based on ICPs and business strategy
+
+### Creating Your First Strategy Task
 
 1. Go to "Create Task"
-2. Select an agent (try "Chief of Staff" for complex tasks)
-3. Enter a title and description
-4. Submit and watch the agents work!
+2. Select "Chief Strategy Officer" as the agent
+3. Provide business context
+4. Submit and watch the agents collaborate!
 
 Example task:
 ```
-Title: Write a blog post about AI agents
+Title: Develop go-to-market strategy for AI-powered productivity app
+
 Description:
 ## Context
-We need content for our tech blog
+We're launching a new AI-powered productivity application that helps remote teams
+coordinate work using autonomous AI agents. We have a small team and limited marketing
+budget ($10K/month). Launch target is in 3 months.
+
+## Product Details
+- SaaS application, $29/user/month
+- Integrates with Slack, Teams, and email
+- Uses AI to automatically route tasks, track progress, and generate reports
+- Key differentiator: Autonomous coordination vs manual project management
 
 ## Objective
-Create an engaging blog post explaining how AI agents work
+Develop a comprehensive business strategy including target customer identification
+and go-to-market approach
 
 ## Expected Output
-A 500-word blog post in markdown format
+1. Strategic plan document
+2. Ideal customer profiles (ICPs)
+3. Marketing strategy tailored to identified ICPs
 ```
+
+The CSO will:
+- Analyze your business context
+- Create a strategic plan
+- Assign ICP research to the ICP Analyst
+- Coordinate with CMO for marketing strategy
+
+All outputs will be available as documents that you can review in the Documents tab.
 
 ## How It Works
 
-1. User creates a task assigned to an agent
+### Technical Flow
+
+1. User creates a task assigned to an agent (e.g., CSO)
 2. Convex triggers the agent's `processTask` action
-3. Agent calls Gemini LLM with context (task, available agents, documents)
-4. LLM returns JSON array of actions (assignTask, writeDocument, completeTask, etc.)
+3. Agent calls Gemini LLM with context (task description, available agents, existing documents)
+4. LLM analyzes the task and returns JSON array of actions:
+   - `writeDocument`: Create strategy/research/plan documents
+   - `assignTask`: Delegate work to other agents
+   - `completeTask`: Mark task as done
 5. Actions are executed, potentially creating new tasks for other agents
 6. Process cascades through the agent workforce
+
+### Business Strategy Workflow Example
+
+**Step 1: User → CSO**
+```
+User creates task: "Develop strategy for SaaS product"
+CSO receives task → Analyzes business context
+```
+
+**Step 2: CSO Actions**
+```
+CSO creates document: "Business Strategy Plan"
+CSO assigns task to ICP Analyst: "Research target customer profiles"
+CSO completes its task
+```
+
+**Step 3: ICP Analyst → CMO**
+```
+ICP Analyst receives task → Reviews strategy document
+ICP Analyst creates document: "Ideal Customer Profiles"
+ICP Analyst assigns task to CMO: "Develop marketing strategy"
+ICP Analyst completes its task
+```
+
+**Step 4: CMO Completes Workflow**
+```
+CMO receives task → Reviews strategy + ICP documents
+CMO creates document: "Marketing Strategy & Campaign Plan"
+CMO completes its task
+```
+
+**Result**: Three comprehensive documents created through autonomous agent collaboration
 
 ## Development & Validation
 
@@ -176,7 +245,7 @@ npm run validate
 - Task management system
 - Document management
 - LLM integration with Gemini
-- Bootstrap script with 5 agents
+- Bootstrap script with business strategy agents
 
 ### ✅ Phase 2: Frontend UI (Complete)
 - React + TypeScript frontend
@@ -186,13 +255,24 @@ npm run validate
 - Agent list display
 - Responsive design
 
-### 🔄 Phase 3: Next Steps
+### ✅ Current Configuration: Business Strategy & Marketing Team
+- **4 Specialized Agents**:
+  - Chief of Staff (COS) - Coordination & routing
+  - Chief Strategy Officer (CSO) - Business strategy
+  - ICP Analyst - Customer research & profiling
+  - Chief Marketing Officer (CMO) - Marketing strategy
+- **Automated Workflow**: Strategy → ICP Research → Marketing Plan
+- **Document-Based Collaboration**: Agents share knowledge through documents
+
+### 🔄 Phase 3: Potential Enhancements
 - [ ] Add real-time updates with Convex subscriptions
-- [ ] Implement agent activity visualization
+- [ ] Implement agent activity timeline visualization
 - [ ] Add task filtering and search
-- [ ] Create metrics and analytics dashboard
+- [ ] Create metrics dashboard (time per task, documents created, etc.)
 - [ ] Add document editing capabilities
 - [ ] Implement task dependencies visualization
+- [ ] Add more specialized agents (Sales, Product, Engineering, etc.)
+- [ ] Create agent templates for different business domains
 
 ## License
 
