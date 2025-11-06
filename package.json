@@ -1,0 +1,25 @@
+{
+  "name": "exodia",
+  "version": "1.0.0",
+  "description": "Agentic Workforce System - An experimental AI agent coordination platform",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "convex dev",
+    "deploy": "convex deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:34707/git/Jengkuen/exodia"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "convex": "^1.28.2"
+  }
+}
