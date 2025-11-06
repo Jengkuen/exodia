@@ -28,23 +28,26 @@ Exodia creates a "workforce" of AI agents that can autonomously coordinate work 
 npm install
 ```
 
-### 2. Set Up Convex
+### 2. Set Up Convex Backend
+
+In one terminal, start the Convex development server:
 
 ```bash
-npx convex dev
+npm run dev:backend
 ```
 
 This will:
 - Create a new Convex project
 - Generate the `CONVEX_DEPLOYMENT` URL
-- Start the development server
+- Start the backend server and watch for changes
 
 ### 3. Configure Environment Variables
 
-Update `.env.local` with:
+Update `.env.local` with the values from Convex:
 
 ```env
 CONVEX_DEPLOYMENT=<your-convex-deployment-url>
+VITE_CONVEX_URL=<your-convex-deployment-url>  # Same as above
 GEMINI_API_KEY=<your-gemini-api-key>
 ```
 
@@ -65,40 +68,70 @@ This creates 5 initial agents:
 - Technical Writer
 - Project Manager
 
+### 5. Start the Frontend
+
+In a second terminal, start the React frontend:
+
+```bash
+npm run dev
+```
+
+The UI will be available at `http://localhost:3000`
+
 ## Project Structure
 
 ```
-convex/
-├── schema.ts          # Database schema
-├── agents.ts          # Agent CRUD + processing logic
-├── tasks.ts           # Task management
-├── documents.ts       # Document management
-├── llm.ts             # Gemini API integration
-└── setup.ts           # Bootstrap script
+convex/                    # Backend (Convex functions)
+├── schema.ts              # Database schema
+├── agents.ts              # Agent CRUD + processing logic
+├── tasks.ts               # Task management
+├── documents.ts           # Document management
+├── llm.ts                 # Gemini API integration
+└── setup.ts               # Bootstrap script
+
+src/                       # Frontend (React)
+├── components/
+│   ├── TaskCreator.tsx    # Task creation form
+│   ├── TaskMonitor.tsx    # Task list and monitoring
+│   ├── DocumentViewer.tsx # Document browser
+│   └── AgentList.tsx      # Agent registry
+├── lib/
+│   └── convex.ts          # Convex client setup
+├── App.tsx                # Main app component
+├── App.css                # App styles
+├── main.tsx               # Entry point
+└── index.css              # Global styles
 ```
 
 ## Usage
 
-### Creating a Task
+### Using the Web Interface
 
-Use the Convex dashboard to call the `tasks:create` mutation:
+1. **View Agents**: Click "Agents" to see all active agents in your workforce
+2. **Create Tasks**: Click "Create Task" to assign work to an agent
+3. **Monitor Progress**: Click "Task Monitor" to see all tasks and their statuses
+4. **View Documents**: Click "Documents" to browse knowledge created by agents
 
-```json
-{
-  "assignedTo": "<agent-id>",
-  "createdBy": "user",
-  "title": "Write a blog post about AI agents",
-  "description": "Create an engaging blog post explaining how AI agents work..."
-}
+### Creating Your First Task
+
+1. Go to "Create Task"
+2. Select an agent (try "Chief of Staff" for complex tasks)
+3. Enter a title and description
+4. Submit and watch the agents work!
+
+Example task:
 ```
+Title: Write a blog post about AI agents
+Description:
+## Context
+We need content for our tech blog
 
-### Monitoring Tasks
+## Objective
+Create an engaging blog post explaining how AI agents work
 
-Query `tasks:listRecent` to see all tasks and their statuses.
-
-### Viewing Documents
-
-Query `documents:list` to see all documents created by agents.
+## Expected Output
+A 500-word blog post in markdown format
+```
 
 ## How It Works
 
@@ -135,13 +168,31 @@ npm run validate
 - All functions properly typed
 - See [VALIDATION.md](./VALIDATION.md) for detailed report
 
-## Next Steps (Phase 2+)
+## Implementation Status
 
-- [ ] Build React frontend UI
-- [ ] Add task monitoring dashboard
-- [ ] Create document viewer
-- [ ] Add agent activity visualization
-- [ ] Implement testing and observation tools
+### ✅ Phase 1: Infrastructure (Complete)
+- Database schema and Convex setup
+- Agent CRUD operations
+- Task management system
+- Document management
+- LLM integration with Gemini
+- Bootstrap script with 5 agents
+
+### ✅ Phase 2: Frontend UI (Complete)
+- React + TypeScript frontend
+- Task creation form
+- Task monitoring dashboard
+- Document viewer
+- Agent list display
+- Responsive design
+
+### 🔄 Phase 3: Next Steps
+- [ ] Add real-time updates with Convex subscriptions
+- [ ] Implement agent activity visualization
+- [ ] Add task filtering and search
+- [ ] Create metrics and analytics dashboard
+- [ ] Add document editing capabilities
+- [ ] Implement task dependencies visualization
 
 ## License
 

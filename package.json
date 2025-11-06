@@ -8,7 +8,11 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "convex dev",
+    "dev:backend": "convex dev",
+    "dev:frontend": "vite",
+    "dev": "npm run dev:frontend",
+    "build:frontend": "vite build",
+    "preview": "vite preview",
     "deploy": "convex deploy",
     "build": "tsc --noEmit",
     "lint": "eslint convex/**/*.ts",
@@ -26,14 +30,20 @@
   "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "convex": "^1.28.2"
+    "convex": "^1.28.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.46.3",
     "@typescript-eslint/parser": "^8.46.3",
+    "@vitejs/plugin-react": "^5.1.0",
     "eslint": "^9.39.1",
     "globals": "^16.5.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^7.2.1"
   }
 }
